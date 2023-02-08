@@ -1,0 +1,182 @@
+-- Create Date dim  
+Create Table Date_Dim 
+(   Date_Key Date constraint Date_ID_PK primary key
+,    Day_No Number (4)
+,    Week_No Number (3)
+,    Month_No Number (2)
+,    Quarter_No Number (2)
+,    Year_No Number (5)
+,   Day_Name Varchar2(25)
+,   Is_Holiday Number (1) Default 0
+,  Day_Category Varchar2(10)
+);
+ 
+ -- Create Classes and Fares Dim
+ Create Table Classes_and_Fares_Dim 
+(   
+    Class_Name Varchar2(25)
+,   Fare_Code char(2) constraint Fare_Code_PK primary key
+,   Fare_Disc varchar2(100)
+);
+
+-- create Route Dim 
+create Table Route_Dim
+(
+    Route_ID Number (8) Constraint Route_ID_PK Primary Key
+,   Departure_Airport varchar2(25)
+,   Arrival_Airport varchar2(25)
+,   Miles Number (8,2)
+);
+
+-- Create Employees Dim 
+Create Table Employees_Dim 
+( 
+    Employee_ID Number (8,2) Constraint Employee_ID_PK Primary Key
+,   Employee_Name varchar2 (50) 
+,   Employee_Position varchar2(50)
+,   Employee_Job_Category Varchar2(25)
+,   Salary Number (10,2)
+ );
+
+-- create Passenger Dim 
+Create table Passanger_dim 
+(
+    Passanger_ID Number(6) constraint Passanger_ID_PK primary key 
+,   First_name varchar2(25) 
+,   Last_name varchar2(25) 
+,   Gender Varchar2(8)
+,   Date_Of_Birth Date
+,   Email Varchar2(50)
+,   Phone Varchar2(25)
+,   Address Varchar2(25)
+,   City Varchar2(25)
+,   Country Varchar2(25)
+,   Is_Frequent  char(2)
+,   Status Varchar2(25)
+);
+
+-- create Promotion Dim 
+create table Promotion_Dim
+(
+    Promotion_ID number (4) constraint prom_id_prmk primary key 
+,   Promotion_Name varchar2 (25)
+,   Promotion_Type varchar2 (25)
+,   Begin_Date Date
+,   End_Date Date
+);
+
+-- Create FeedBack Dim 
+Create table Feedback_dim
+(
+    Feedback_ID Number(6) constraint Feedback_ID_PK primary key
+,   Feedback_Category Varchar2(25)
+,   Problem_Name Varchar2(25)
+,   Risk_Name Varchar2(25)
+,   Risk_Score Number(2)
+,   Probability Number(2)
+,   Problem_Severity Number(3)
+);
+
+-- Create Airport Dim 
+create table  Airport_Dim
+(
+    Airport_Id Number (4) constraint Airport_id_prmk primary key
+,   Airport_Name varchar2 (25)
+,   Airport_City varchar2 (25)
+);
+
+-- Create Airplane Dim 
+create table  Airplane_Dim
+(
+    Airplane_ID number(4) constraint airplane_Id_pk primary key
+,   Airplane_Model Varchar2(25)
+,   No_Seats Number(4)
+,   Classes Varchar2(25)
+,   Start_Date Date
+);
+ 
+-- create Reservation Fact Table
+create table Behavior_Of_Passengers
+(
+    Ticket_ID Number(8)
+,   Reservation_Date Date Constraint Reservation_Date_FK references date_dim(date_Key) 
+,   Flight_ID Number (8)
+,   Passenger_ID Number constraint Reservation_Passenger_id_fk references Passanger_dim(Passanger_ID) 
+,   Channel_ID Number(8)
+,   Fare_Code Char constraint Reservation_Fare_Code_FK references Classes_and_fares_dim (Fare_code)
+,   Ticket_Price number (8,2) 
+,   Discount Number (4,2) Default 0
+,   Price_After_Discount Number (8,2) 
+,   Route_ID Number(8) Constraint Behavior_Of_Passengers_Route_ID_FK references Route_Dim (Route_ID)
+,   Upgrade_Status Varchar2(25)
+,   Earned_Reason_ID Number(8)
+,   Earned_Points Number(5)
+,   Redeemed_Date Date constraint behavior_Date_Redeemed_id_fk references Date_DIM(Date_key)
+,   Redeem_Reason_ID Number(8)
+,   Redeemed_Quantity Number(5)
+,   Promotion_ID Number(4) constraint behavior_Promation_id_fk references Promotion_DIM(Promotion_id) 
+,   Promotion_response varchar2(5)
+,   Overnight_Stay_Duration Number(4)
+);
+
+
+-- Create Channel Dim Table
+Create Table Channel_Dim
+(
+      Channel_ID Number (8) constraint Channel_ID_PK Primary Key
+,     Channel_name varchar2 (25)
+);
+
+-- Create Reason Dim Table
+Create Table Reason_Dim
+(
+      Reason_ID Number (8) constraint Reason_ID_PK Primary Key
+,     Reason varchar2 (50)
+,     Status varchar2 (25)
+);
+
+-- create  Behavior of Passengers
+create table Behavior_of_Passengers
+(
+    Flight_Id Number(8) 
+,   Passenger_ID Number(6) constraint behavior_of_Passanger_id_fk references Passanger_DIM(Passanger_id)
+,   Fare_Code Char(2) constraint behavior_Fare_id_fk references Classes_and_Fares_Dim(Fare_code)
+,   Upgrade_Status Varchar2(25)
+,   Date_Earned Date constraint behavior_Date_earned_id_fk references Date_DIM(Date_key)
+,   Earned_Reason_ID Varchar2(25) constraint Behavior_of_Passengers_Earned_Reason_ID_FK references Reason_Dim (Reason_ID)
+,   Earned_Points Number(5)
+,   Redeemed_Date Date constraint behavior_Date_Redeemed_id_fk references Date_DIM(Date_key)
+,   Redeem_Reason_ID Varchar2(25) constraint Behavior_of_Passengers_Redeemed_Reason_ID_FK references Reason_Dim (Reason_ID)
+,   Redeemed_Quantity Number(5)
+,   Promotion_ID Number(4) constraint behavior_Promation_id_fk references Promotion_DIM(Promotion_id) 
+,   Promotion_response varchar2(5)
+,   Overnight_Stay_Duration Number(4)
+);
+
+-- Create Customer Care Fact 
+create  table Customer_Care_Fact 
+(
+    Passenger_ID Number(6)  constraint Customer_care_Passenger_id_fk references Passanger_dim(Passanger_ID)
+,   Flight_ID Number(8)
+,   Feedback_Date Date constraint Customer_care_Feedback_Date_FK references Date_Dim(Date_key)
+,   Feedback_ID Number(6)  constraint Customer_care_Feedback_ID_FK references Feedback_Dim(Feedback_ID)
+,   Description Varchar2(100)
+);
+
+-- create Flight Fact Table
+create table Flight_Fact
+(
+     Flight_ID Number (8)
+,    Route_ID Number (8) constraint Flight_Fact_Route_ID_FK references Route_Dim (Route_ID)
+,    Flight_Date Date constraint Flight_Fact_Date_fk references Date_DIM(Date_key)
+,    Total_Sales Number (10)
+,    Manpower_Cost Number (10)
+,    Features_Cost Number (10)
+,    Total_Cost Number (10)
+,    Total_Profit Number (10)
+,    MainPilot_ID Number (5) constraint MainPilot_ID_fk references Employees_dim (Employee_ID )
+,    SeconPilot_ID Number (5) constraint SeconPilot_ID_fk references Employees_dim (Employee_ID )
+,    Airplane_ID Number (4) constraint Flight_Fact_Airplane_id_fk references Airplane_dim (Airplane_ID)
+,    FirstHostess_ID Number (5) constraint  FirstHostess_ID_fk references Employees_dim (Employee_ID )
+,    SecondHostess_ID Number (5) constraint SecondHostess_ID_fk references Employees_dim (Employee_ID) 
+);

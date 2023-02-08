@@ -1,0 +1,46 @@
+--Rretive total sales ,total cost ,total profit ber every year of our comany  
+select sum(fli_fac.TOTAL_SALES) as Total_sales,  sum(fli_fac.TOTAL_COST) as Total_Cost,   sum(fli_fac.TOTAL_PROFIT) as Total_Profit , date_d.YEAR_NO
+from flight_fact fli_fac , date_dim date_d
+where date_d.date_key =  fli_fac.Flight_date
+group by year_no ;
+
+
+--Retreive fare base & upgrade status for every frequent  Flayer 
+select  pass_dim.PASSANGER_ID, pass_dim.FIRST_NAME, beh_of_pass.FARE_CODE , beh_of_pass.UPGRADE_STATUS , class_far.FARE_DISC
+from BEHAVIOR_OF_PASSENGERS beh_of_pass , PASSANGER_DIM pass_dim , CLASSES_AND_FARES_DIM class_far
+where pass_dim.PASSANGER_ID =  beh_of_pass.PASSENGER_ID
+and CLASS_FAR.FARE_CODE = BEH_OF_PASS.FARE_CODE 
+and pass_dim.IS_FREQUENT='1';
+
+
+
+-- Get the feedback for the Frequent Flyers and the severty for each 
+select PASSANGER_DIM.PASSANGER_ID , PASSANGER_DIM.FIRST_NAME , CUSTOMER_CARE_FACT.FEEDBACK_DATE as Feedback_date ,CUSTOMER_CARE_FACT.DESCRIPTION as Feedback_Discription , FEEDBACK_DIM.PROBLEM_SEVERITY 
+from PASSANGER_DIM , Customer_care_fact , Feedback_dim
+where PASSANGER_DIM.PASSANGER_ID = CUSTOMER_CARE_FACT.PASSENGER_ID
+And CUSTOMER_CARE_FACT.FEEDBACK_ID = FEEDBACK_DIM.FEEDBACK_ID
+And PASSANGER_DIM.IS_FREQUENT='1';
+
+
+
+--number of promtion and how many Frequent Flayers  respond to special fare promotions
+Select PASSANGER_DIM.PASSANGER_ID , PASSANGER_DIM.FIRST_NAME , count(BEHAVIOR_OF_PASSENGERS.promotion_id) as Count_of_promotio_Takes, count(BEHAVIOR_OF_PASSENGERS.PROMOTION_RESPONSE ) as  Count_of_accepted_promotion
+From PASSANGER_DIM , BEHAVIOR_OF_PASSENGERS
+where PASSANGER_DIM.PASSANGER_ID = BEHAVIOR_OF_PASSENGERS.PASSENGER_ID
+And PASSANGER_DIM.PASSANGER_ID = '1'
+And BEHAVIOR_OF_PASSENGERS.PROMOTION_RESPONSE = 'Yes'
+Group by  PASSANGER_DIM.PASSANGER_ID , PASSANGER_DIM.FIRST_NAME ;
+
+
+-- which reason is the most frequent ?
+Select Reason , count(REASON) as Earned_Reason_count
+from BEHAVIOR_OF_PASSENGERS
+group by Reason
+where Status = "Earned"
+order by  Reason_count ;
+
+
+
+
+
+
