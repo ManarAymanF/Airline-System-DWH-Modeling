@@ -15,6 +15,7 @@ A leading airline company engaged our services to support the executive manageme
     Construct a sample of SQL queries (5 – 8 queries) using your physical model design which can be used to answer possible questions by the decision maker as             described in the Project above. List the business question with each query. The output should be a Word file.
     
  What we have done in this project: 
+ 
   In order to execute this and distribute those reports to other business sectors inside the organisation
   1) we first considered how many business processes we would require. We came to the conclusion that there would be three processes involved in asking all the questions after far too many talks.
   2) Customer service is crucial for gathering feedback from customers and learning about their preferences so we can improve our services. This includes information about the passenger's behaviour as well as details about the ticket, the passenger, the flight, its route, and any promotions that may have been included.
