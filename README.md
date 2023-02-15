@@ -14,13 +14,13 @@ A leading airline company engaged our services to support the executive manageme
     Create a table/s in oracle DBMS and populate sample data for your queries.
     Construct a sample of SQL queries (5 – 8 queries) using your physical model design which can be used to answer possible questions by the decision maker as             described in the Project above. List the business question with each query. The output should be a Word file.
     
- What we have done in this project: 
+# What we have done in this project: 
  
-  In order to execute this and distribute those reports to other business sectors inside the organisation
-  1) we first considered how many business processes we would require. We came to the conclusion that there would be three processes involved in asking all the questions after far too many talks.
-  2) Customer service is crucial for gathering feedback from customers and learning about their preferences so we can improve our services. This includes information about the passenger's behaviour as well as details about the ticket, the passenger, the flight, its route, and any promotions that may have been included.
+  In order to execute this and distribute those reports to other business sectors inside the organisation we first considered how many business processes we would require. We came to the conclusion that there would be 3 processes involved in asking all the questions after far too many talks.
+  1) Customer Care is crucial for gathering feedback from customers and learning about their preferences so we can improve our services.
+  2) The Behavior of the passangers includes information about the passenger's behaviour as well as details about the ticket, the passenger, the flight, its route, and any promotions that may have been included.
   3) The trip's goal is to give the executive a full report on the state of the company's operations.
  
  We succeeded in defining the dimensions that will enable us to characterise various aspects of the business once we had completed putting the procedures in place.
-We will construct many models, including the bus matrix, the dimensional model, the logical model, and the physical model.
-We start building the model on the DBMS after finishing all of that and all the relations, adding some dummy data, and running five SQL queries to extract information from the data.
+ We will construct many models, including the bus matrix, the dimensional model, the logical model, and the physical model.
+ We start building the model on the DBMS after finishing all of that and all the relations, adding some dummy data, and running five SQL queries to extract information from the data.
