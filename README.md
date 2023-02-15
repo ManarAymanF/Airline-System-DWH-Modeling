@@ -20,6 +20,7 @@ A leading airline company engaged our services to support the executive manageme
   1) we first considered how many business processes we would require. We came to the conclusion that there would be three processes involved in asking all the questions after far too many talks.
   2) Customer service is crucial for gathering feedback from customers and learning about their preferences so we can improve our services. This includes information about the passenger's behaviour as well as details about the ticket, the passenger, the flight, its route, and any promotions that may have been included.
   3) The trip's goal is to give the executive a full report on the state of the company's operations.
-  We succeeded in defining the dimensions that will enable us to characterise various aspects of the business once we had completed putting the procedures in place.
+ 
+ We succeeded in defining the dimensions that will enable us to characterise various aspects of the business once we had completed putting the procedures in place.
 We will construct many models, including the bus matrix, the dimensional model, the logical model, and the physical model.
 We start building the model on the DBMS after finishing all of that and all the relations, adding some dummy data, and running five SQL queries to extract information from the data.
