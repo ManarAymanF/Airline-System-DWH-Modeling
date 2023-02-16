@@ -22,7 +22,7 @@ A leading airline company engaged our services to support the executive manageme
 * Define the Business Process . 
 * State the modeling process for each business process.
 * Construct bus matrix
-* Construct a logical data model using any diagramming tool. 
+* Construct a logical data model using diagramming tool. 
 * Translate the logical data model to a physical data model .
 * Create a table/s in oracle DBMS and populate sample data for your queries.
 * Construct a sample of SQL queries using your physical model design which can be used to answer Business questions 
