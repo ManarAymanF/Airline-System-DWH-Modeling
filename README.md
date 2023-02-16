@@ -25,7 +25,8 @@ A leading airline company engaged our services to support the executive manageme
 * Translate the logical data model to a physical data model .
 * Create a table/s in oracle DBMS and populate sample data for your queries.
 * Construct a sample of SQL queries using your physical model design which can be used to answer Business questions 
-    
+
+
 
 
  
