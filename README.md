@@ -24,3 +24,4 @@ A leading airline company engaged our services to support the executive manageme
  We succeeded in defining the dimensions that will enable us to characterise various aspects of the business once we had completed putting the procedures in place.
  We will construct many models, including the bus matrix, the dimensional model, the logical model, and the physical model.
  We start building the model on the DBMS after finishing all of that and all the relations, adding some dummy data, and running five SQL queries to extract information from the data.
+
